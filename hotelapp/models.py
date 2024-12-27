@@ -4,11 +4,13 @@ from django.db import models
 class Hotel(models.Model):
     hotelId = models.AutoField(primary_key=True)
     hotelName = models.CharField(max_length=100)
+    address = models.CharField(max_length=200)
     location = models.CharField(max_length=100)
     hotelType = models.CharField(max_length=100)
     rating = models.IntegerField()
     contact = models.CharField(max_length=100)
     hotel_image = models.ImageField(null=True, blank=True, upload_to="images/")
+    
 
 class Category(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)

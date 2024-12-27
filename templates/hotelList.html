@@ -1,0 +1,44 @@
+<html>
+  {% load static %}
+  <head>
+    <title>Hotel List</title>
+  </head>
+  <body>
+    <table style="border: 1px solid black">
+      <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Address</td>
+        <td>Location</td>
+        <td>Type</td>
+        <td>Rating</td>
+        <td>Contact</td>
+        <td>Image</td>
+        <td colspan="2">action</td>
+        <td></td>
+      </tr>
+
+      {% for i in hotels %}
+      <tr>
+        <td>{{i.hotelId}}</td>
+        <td>{{i.hotelName}}</td>
+        <td>{{i.address}}</td>
+        <td>{{i.location}}</td>
+        <td>{{i.hotelType}}</td>
+        <td>{{i.rating}}</td>
+        <td>{{i.contact}}</td>
+        <td>
+          <img
+            src="/{{i.hotel_image}}"
+            alt="no image"
+            height="200px"
+            width="200px"
+          />
+        </td>
+        <td><a href="edit/{{i.hotelId}}">edit</a></td>
+        <td><a href="delete/{{i.hotelId}}">delete</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
