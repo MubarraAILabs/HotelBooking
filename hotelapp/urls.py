@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
     path("add/", views.addhotel, name="add_hotel"),
     path("view/", views.viewhotels, name="view"),
     path("update/",views.updateHotel,name="update"),
@@ -19,6 +20,12 @@ urlpatterns = [
     path('viewbooking/',views.showBookings, name='viewbooking'),
     path('booking_table/', views.booking_table, name='booking_table'),
     path('booking_confirm_list/', views.confirm_bookings, name='booking_confirm_list'), 
-
+     path("add/",views.saveHotels),
+    path("lst/",views.showHotels),
+    path("update/",views.updateHotels,name="update"),
+    path("lst/delete/<int:id>",views.deleteHotels,name="delete"),
+    path("lst/edit/<int:id>",views.editHotels,name="edit"),
 
 ]
+
+   
