@@ -1,0 +1,58 @@
+<html>
+  {% extends 'header.html' %} {% load static %}
+
+  <head>
+    <title>Hotel List</title>
+  </head>
+
+  <body>
+    {% block container %}
+    <table style="border: 1px solid black">
+      <tr>
+        <td>ID</td>
+        <td>Name</td>
+        <td>Address</td>
+        <td>Location</td>
+        <td>Type</td>
+        <td>Rating</td>
+        <td>Contact</td>
+        <td>Image</td>
+        {% if request.session.username is None and request.session.email is not None %}
+        <td colspan="3">action</td>
+        {% endif %} {% if request.session.username is not None or request.session.email is not None %}
+        <td colspan="1">action</td>
+        {% endif %}
+        <td></td>
+      </tr>
+
+      {% for i in hotels %}
+      <tr>
+        <td>{{i.id}}</td>
+        <td>{{i.name}}</td>
+        <td>{{i.location}}</td>
+        <td>{{i.address}}</td>
+        <td>{{i.type}}</td>
+        <td>{{i.rating}}</td>
+        <td>{{i.contact}}</td>
+        <td>
+          <img
+            src="{{i.image.url}}"
+            alt="no image"
+            height="200px"
+            width="200px"
+          />
+        </td>
+        {% if request.session.username is None and request.session.email is not None %}
+        <td><a href="category/{{i.id}}">Add Category</a></td>
+        <td><a href="edit/{{i.id}}">edit</a></td>
+        <td><a href="delete/{{i.id}}">delete</a></td>
+        {% endif %} {% if request.session.username is not None or request.session.email is not None %}
+
+        <td><a href="category_list/{{i.id}}">category_list</a></td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+    {% endblock %}
+  </body>
+</html>

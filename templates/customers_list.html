@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add customers</title>
+  </head>
+  <body>
+    {% extends 'header.html' %} {% block container %}
+    <table style="border: 2px solid black">
+      <tr>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Password</td>
+        <td>Phone Number</td>
+        <td>Aadhar Id</td>
+        <td>Address</td>
+        <td colspan="2">action</td>
+      </tr>
+
+      {% for i in customers %}
+      <tr>
+        <td>{{i.name_customer}}</td>
+        <td>{{i.email}}</td>
+        <td>{{i.password}}</td>
+        <td>{{i.phone_number}}</td>
+        <td>{{i.AadharId}}</td>
+        <td>{{i.address_customer}}</td>
+        <td><a href="edit/{{i.email}}">edit</a></td>
+        <td><a href="delete/{{i.email}}">delete</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endblock %}
+  </body>
+</html>

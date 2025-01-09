@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>update customer</title>
+  </head>
+  <body>
+    {% extends 'header.html' %} {% block container %}
+    <h1>Update Customer</h1>
+    <form method="post" action="{% url 'cupdate' %}" >
+      {% csrf_token %}
+
+      <label for="name">Name:</label>
+      <input type="text" id="name_customer" name="name_customer" value="{{customer_update.name_customer}}" required /><br /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="{{customer_update.email}}" required /><br /><br />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" value="{{customer_update.password}}" required /><br /><br />
+
+      <label for="phone_number">Contact:</label>
+      <input type="text" id="phone_number" name="phone_number" value="customer_update.phone_number" /><br /><br />
+
+       <label for="AadharId">AadharId:</label>
+      <input
+        type="text"
+        id="AadharId"
+        name="AadharId"
+        value="{{customer_update.AadharId}}"
+        required
+      /><br /><br />
+
+      <label for="address_customer">Address:</label>
+      <input type="text" id="address_customer" name="address_customer" value="{{customer_update.address_customer}}" required></input><br /><br />
+
+
+      <button type="submit">Save</button>
+      {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List Of Bookings</title>
+  </head>
+  <body>
+    {% extends 'header.html' %} {% block container %}
+    <h2>List Of Bookings</h2>
+    
+    <table>
+      <tr>
+        <th>Customer</th>
+        <th>Hotel</th>
+        <th>Room Category</th>
+        <th>No. of People</th>
+        <th>No. of Rooms</th>
+        <th>Check-In</th>
+        <th>Check-Out</th>
+        <th>Total Price</th>
+        <td colspan="1">action</td>
+      </tr>
+      {% for booking in bookings %}
+      <tr>
+        <td>{{ booking.customer.email}}</td>
+        <td>{{ booking.hotel.name }}</td>
+        <td>{{ booking.room_category.roomType }}</td>
+        <td>{{ booking.no_of_people }}</td>
+        <td>{{ booking.no_of_rooms }}</td>
+        <td>{{ booking.check_in }}</td>
+        <td>{{ booking.check_out }}</td>
+        <td>{{ booking.total_price }}</td>
+        <td><a href="{% url 'booking_table' %}">Confirm</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    {% extends 'header.html' %} {% block container %}
+    <h2>Category List</h2>
+    <table border="1">
+      <tr>
+        <th>Hotel</th>
+        <th>Room Number</th>
+        <th>Room Type</th>
+        <th>Price per Room</th>
+        <th>Available Rooms</th>
+        {% if request.session.username is None and request.session.email is not None %}
+        <th colspan="2">Actions</th>
+        {% endif %} {% if request.session.username is not None and request.session.email is None %}
+        <th colspan="1">Actions</th>
+        {% endif%}
+      </tr>
+      {% for category in categories %}
+      <tr>
+        <td>{{ category.hotel.id }}</td>
+        <td>{{ category.room_No }}</td>
+        <td>{{ category.roomType }}</td>
+        <td>{{ category.price_per_rooms }}</td>
+        <td>{{ category.available_rooms }}</td>
+        <td>
+          {% if request.session.username is None and request.session.email is not None %}
+          <a href="update_category/{{category.id}}">Update</a>
+          <a href="delete_category/{{category.id}}">Delete</a>
+          {% endif %} {% if request.session.username is not None and request.session.email is None %}
+          <a href="{% url 'book_room' category.id %}">Book</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endblock %}
+  </body>
+</html>

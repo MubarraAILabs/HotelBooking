@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>add customer</title>
+  </head>
+  <body>
+    {% extends 'header.html' %} {% block container %}
+    <h1>Add Customer</h1>
+    <form method="post" >
+      {% csrf_token %}
+
+      <label for="room_No">Room No:</label>
+      <input type="number" id="room_No" name="room_No" required /><br /><br />
+
+      <label for="roomType">Room Type:</label>
+      <input type="text" id="roomType" name="roomType" required /><br /><br />
+
+      <label for="price_per_rooms">Price Per Room:</label>
+      <input type="number" id="price_per_rooms" name="price_per_rooms" required /><br /><br />
+
+      <label for="available_rooms">Available Rooms:</label>
+      <input type="number" id="available_rooms" name="available_rooms" /><br /><br />
+
+      <button type="submit">Save</button>
+      {% endblock %}
+  </body>
+</html>

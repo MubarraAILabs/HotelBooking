@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>add customer</title>
+  </head>
+  <body>
+    {% extends 'header.html' %} {% block container %}
+    <h1>Booking Confirmation</h1>
+    <form action="" method="post">
+      {% csrf_token %}
+
+      <label for="ordernumber">Room No:</label>
+      <input type="text" id="ordernumber" name="ordernumber"/><br /><br />
+
+      <label for="orderdate">Order Date:</label>
+      <input type="date" id="orderdate" name="orderdate"/><br /><br />
+
+      <label for="first_name">First Name:</label>
+      <input type="text" id="first_name" name="first_name"/><br /><br />
+
+      <label for="last_name">Last Name:</label>
+      <input type="text" id="last_name" name="last_name" /><br /><br />
+
+      <label for="address">Address:</label>
+      <input type="text" id="address" name="address" /><br /><br />
+
+      <label for="City">City:</label>
+      <input type="text" id="City" name="City" /><br /><br />
+
+      <label for="pincode">PIN Code</label>
+      <input type="number" id="pincode" name="pincode"/><br /><br />
+
+      <button type="submit">Save</button>
+      
+      </form>
+
+      {% endblock %}
+  </body>
+</html>

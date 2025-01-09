@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Here</title>
+  </head>
+  <body>
+    {% extends 'header.html' %} {% block container %}
+    <h2>Welcome! Book a cozy room for yourself!</h2>
+    <form method="post" id="bookingForm">
+      {% csrf_token %}
+      <label for="customer">Customer:</label>
+      <input type="email" value="{{request.session.username}}" />
+      <br />
+
+      <label for="room_category">Room Category:</label>
+      <input
+        type="text"
+        name="room_category"
+        id="room_category"
+        value="{{ room_category.roomType }} "
+        data-price="{{ room_category.price_per_rooms|default_if_none:0 }}"
+      />
+
+      <br />
+
+      <label for="no_of_people">Number of People:</label>
+      <input type="number" name="no_of_people" id="no_of_people" required />
+      <br />
+
+      <label for="no_of_rooms">Number of Rooms:</label>
+      <input
+        type="number"
+        name="no_of_room"
+        id="no_of_room"
+        required
+        onchange="updatePrice()"
+      />
+      <br />
+
+      <label for="check_in">Check-in Date:</label>
+      <input
+        type="date"
+        name="check_in"
+        id="check_in"
+        required
+        onchange="updatePrice()"
+      />
+      <br />
+
+      <label for="check_out">Check-out Date:</label>
+      <input
+        type="date"
+        name="check_out"
+        id="check_out"
+        required
+        onchange="updatePrice()"
+      />
+      <br />
+
+      <label for="total_price">Total Price:</label>
+      <input type="number" name="total_price" id="total_price" />
+      <br />
+
+      <button type="submit">Create Booking</button>
+    </form>
+
+    <script>
+      function updatePrice() {
+        const roomCategorySelect = document.getElementById("room_category");
+        const selectedOption =
+          roomCategorySelect.options[roomCategorySelect.selectedIndex];
+        const pricePerRoom =
+          parseFloat(selectedOption.getAttribute("data-price")) || 0;
+
+        const noOfRoom =
+          parseFloat(document.getElementById("no_of_room").value) || 0;
+
+        const checkInDate = new Date(document.getElementById("check_in").value);
+        const checkOutDate = new Date(
+          document.getElementById("check_out").value
+        );
+
+        const timeDifference = checkOutDate - checkInDate;
+        const daysDifference = timeDifference / (1000 * 3600 * 24);
+
+        if (daysDifference > 0) {
+          const totalPrice = pricePerRoom * noOfRoom * daysDifference;
+          document.getElementById("total_price").value = totalPrice.toFixed(2);
+          document.getElementById("total_price_display").value =
+            totalPrice.toFixed(2);
+        } else {
+          document.getElementById("total_price").value = "";
+          document.getElementById("total_price_display").value =
+            "Invalid dates";
+        }
+      }
+    </script>
+    {% endblock %}
+  </body>
+</html>
